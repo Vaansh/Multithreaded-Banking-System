@@ -1,7 +1,19 @@
+
 import java.util.Scanner;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/** Server class
+ *
+ * @author Kerly Titus
+ */
 
 public class Server extends Thread{
 
@@ -27,7 +39,7 @@ public class Server extends Thread{
         transaction = new Transactions();
         account = new Accounts[maxNbAccounts];
         objNetwork = new Network("server");
-        System.out.println("\n Initializing the Accounts database ...");
+        System.out.println("\n Inializing the Accounts database ...");
         initializeAccounts( );
         System.out.println("\n Connecting server to network ...");
         if (!(objNetwork.connect(objNetwork.getServerIP())))
@@ -289,6 +301,10 @@ public class Server extends Thread{
     {
         return ("\n server IP " + objNetwork.getServerIP() + "connection status " + objNetwork.getServerConnectionStatus() + "Number of accounts " + getNumberOfAccounts());
     }
+
+    /* *********************************************************************************************************************************************
+     * TODO : implement the method Run() to execute the server thread				 																*
+     * *********************************************************************************************************************************************/
 
     /**
      * Code for the run method
