@@ -138,7 +138,11 @@ public class Accounts {
 	*/
 	public String toString() 
 	{
-		return ("\nAccount number " + getAccountNumber() + "Account type " + getAccountType() + "First name " + getFirstName() + "Last Name " + getLastName() + "Balance " + getBalance());
+		return ("\nAccount number " + getAccountNumber()
+                + "Account type " + getAccountType()
+                + "First name " + getFirstName()
+                + "Last Name " + getLastName()
+                + "Balance " + getBalance());
 	}
     
 }
