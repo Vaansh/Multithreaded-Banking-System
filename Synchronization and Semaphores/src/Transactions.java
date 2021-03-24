@@ -8,10 +8,10 @@ public class Transactions {
     private String transactionStatus;   /* Current transaction status : pending, sent, received, transferred, done */
     
     /** Constructor method of Transactions class
-         * 
-         * @return
-         * @param
-         */
+     *
+     * @return
+     * @param
+     */
     Transactions()
     {
         accountNumber = " ";
@@ -161,7 +161,9 @@ public class Transactions {
      */
     public String toString() 
     {
-    	return ("\nAccount number " + getAccountNumber() + " Account Balance " + getTransactionBalance() + " Message " + getTransactionError());
+    	return ("\nAccount number " + getAccountNumber()
+                + " Account Balance " + getTransactionBalance()
+                + " Message " + getTransactionError());
     }
 
 }

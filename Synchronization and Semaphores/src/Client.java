@@ -94,7 +94,7 @@ public class Client extends Thread {
      */
      public void readTransactions()
      {
-        Scanner inputStream = null;     	/* Transactions input file stream */
+        Scanner inputStream = null;         	/* Transactions input file stream */
         int i = 0;                      		/* Index of transactions array */
         
         try
@@ -125,9 +125,6 @@ public class Client extends Thread {
             
         }
         setNumberOfTransactions(i);		/* Record the number of transactions processed */
-        
-        /* System.out.println("\n DEBUG : Client.readTransactions() - " + getNumberOfTransactions() + " transactions processed"); */
-        
         inputStream.close( );
 
      }
@@ -145,9 +142,6 @@ public class Client extends Thread {
          while (i < getNumberOfTransactions())
          {
             transaction[i].setTransactionStatus("sent");   /* Set current transaction status */
-           
-            /* System.out.println("\n DEBUG : Client.sendTransactions() - sending transaction on account " + transaction[i].getAccountNumber()); */ 
-            
             Network.send(transaction[i]);                            /* Transmit current transaction */
             i++;          
          }
@@ -167,9 +161,6 @@ public class Client extends Thread {
          while (i < getNumberOfTransactions())
          {                 
             Network.receive(transact);                               	/* Receive updated transaction from the network buffer */
-            
-            /* System.out.println("\n DEBUG : Client.receiveTransactions() - receiving updated transaction on account " + transact.getAccountNumber()); */
-            
             System.out.println(transact);                               /* Display updated transaction */    
             i++;
          } 
@@ -199,7 +190,6 @@ public class Client extends Thread {
         Transactions transact = new Transactions();
         long sendClientStartTime = 0, sendClientEndTime, receiveClientStartTime = 0, receiveClientEndTime;
 
-        /* Implement the code for the run method */
         if (getClientOperation().equals("sending"))
         {
             if(Network.getClientConnectionStatus().equals("connected"))
