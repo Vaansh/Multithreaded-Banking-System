@@ -2,17 +2,17 @@ import java.util.concurrent.*;
 
 public class Network extends Thread {
 
-    private static int maxNbPackets;                           /* Maximum number of simultaneous transactions handled by the network buffer */
-    private static int inputIndexClient, inputIndexServer, outputIndexServer, outputIndexClient; /* Network buffer indices for accessing the input buffer (inputIndexClient, outputIndexServer) and output buffer (inputIndexServer, outputIndexClient) */
-    private static String clientIP;                            /* IP number of the client application*/
-    private static String serverIP;                            /* IP number of the server application */
-    private static int portID;                                 /* Port ID of the client application */
-    private static String clientConnectionStatus;              /* Client connection status - connected, disconnected, idle */
-    private static String serverConnectionStatus;              /* Server connection status - connected, disconnected, idle */
-    private static Transactions inComingPacket[];              /* Incoming network buffer */
-    private static Transactions outGoingPacket[];              /* Outgoing network buffer */
-    private static String inBufferStatus, outBufferStatus;     /* Current status of the network buffers - normal, full, empty */
-    private static String networkStatus;                       /* Network status - active, inactive */
+    private static int maxNbPackets;                                                                    /* Maximum number of simultaneous transactions handled by the network buffer */
+    private static int inputIndexClient, inputIndexServer, outputIndexServer, outputIndexClient;        /* Network buffer indices for accessing the input buffer (inputIndexClient, outputIndexServer) and output buffer (inputIndexServer, outputIndexClient) */
+    private static String clientIP;                                                                     /* IP number of the client application*/
+    private static String serverIP;                                                                     /* IP number of the server application */
+    private static int portID;                                                                          /* Port ID of the client application */
+    private static String clientConnectionStatus;                                                       /* Client connection status - connected, disconnected, idle */
+    private static String serverConnectionStatus;                                                       /* Server connection status - connected, disconnected, idle */
+    private static Transactions inComingPacket[];                                                       /* Incoming network buffer */
+    private static Transactions outGoingPacket[];                                                       /* Outgoing network buffer */
+    private static String inBufferStatus, outBufferStatus;                                              /* Current status of the network buffers - normal, full, empty */
+    private static String networkStatus;                                                                /* Network status - active, inactive */
 
     private static Semaphore inBufferEmpty, inBufferFull;
     private static Semaphore outBufferEmpty, outBufferFull;
@@ -484,6 +484,7 @@ public class Network extends Thread {
             outPacket.setTransactionStatus("done");
 
             setoutputIndexClient(((getoutputIndexClient() + 1) % getMaxNbPackets())); /* Increment the output buffer index for the client */
+
             /* Check if output buffer is empty */
             if (getoutputIndexClient() == getinputIndexServer())
             {
