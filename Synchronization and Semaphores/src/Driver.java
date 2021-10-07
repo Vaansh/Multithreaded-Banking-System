@@ -1,13 +1,13 @@
-
 public class Driver {
 
-    /** 
+    /**
      * main class
+     *
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-    	Network objNetwork = new Network( );                        /* Activate the network */
+
+        Network objNetwork = new Network();                        /* Activate the network */
         objNetwork.start();
 
         Server objServer1 = new Server("Thread1");              /* Start the server Thread1 */
@@ -21,5 +21,5 @@ public class Driver {
         objClient2.start();
 
     }
-    
- }
+
+}

@@ -1,4 +1,4 @@
-public class Network extends Thread{
+public class Network extends Thread {
 
     private static int maxNbPackets;                                                                                /* Maximum number of simultaneous transactions handled by the network buffer */
     private static int inputIndexClient, inputIndexServer, outputIndexServer, outputIndexClient;                    /* Network buffer indices for accessing the input buffer (inputIndexClient, outputIndexServer) and output buffer (inputIndexServer, outputIndexClient) */
@@ -15,16 +15,14 @@ public class Network extends Thread{
     /**
      * Constructor of the Network class
      *
-     * @return
      * @param
+     * @return
      */
-    Network(String context)
-    {
+    Network(String context) {
         int i;
 
         /* Initialization of the network components */
-        if (context.equals("network"))
-        {
+        if (context.equals("network")) {
             System.out.println("\n Activating the network ...");
             clientIP = "192.168.2.0";
             serverIP = "216.120.40.10";
@@ -34,8 +32,8 @@ public class Network extends Thread{
             maxNbPackets = 10;
             inComingPacket = new Transactions[maxNbPackets];
             outGoingPacket = new Transactions[maxNbPackets];
-            for (i=0; i < maxNbPackets; i++)
-            {   inComingPacket[i] = new Transactions();
+            for (i = 0; i < maxNbPackets; i++) {
+                inComingPacket[i] = new Transactions();
                 outGoingPacket[i] = new Transactions();
             }
             inBufferStatus = "empty";
@@ -45,306 +43,277 @@ public class Network extends Thread{
             outputIndexServer = 0;
             outputIndexClient = 0;
             networkStatus = "active";
-        }
-        else /* Activate network components for client or server */
+        } else /* Activate network components for client or server */
             System.out.println("\n Activating network components for " + context + "...");
     }
 
     /**
      * Accessor method of Network class
      *
-     * @return clientIP
      * @param
+     * @return clientIP
      */
-    public String getClientIP()
-    {
+    public String getClientIP() {
         return clientIP;
     }
 
     /**
-     *  Mutator method of Network class
+     * Mutator method of Network class
      *
-     * @return
      * @param cip
+     * @return
      */
-    public void setClientIP(String cip)
-    {
+    public void setClientIP(String cip) {
         clientIP = cip;
     }
 
     /**
-     *  Accessor method of Network class
+     * Accessor method of Network class
      *
-     * @return serverIP
      * @param
+     * @return serverIP
      */
-    public String getServerIP()
-    {
+    public String getServerIP() {
         return serverIP;
     }
 
     /**
-     *  Mutator method of Network class
+     * Mutator method of Network class
      *
-     * @return
      * @param sip
+     * @return
      */
-    public void setServerIP(String sip)
-    {
+    public void setServerIP(String sip) {
         serverIP = sip;
     }
 
     /**
-     *  Accessor method of Network class
+     * Accessor method of Network class
      *
-     * @return clientConnectionStatus
      * @param
+     * @return clientConnectionStatus
      */
-    public String getClientConnectionStatus()
-    {
+    public String getClientConnectionStatus() {
         return clientConnectionStatus;
     }
 
     /**
-     *  Mutator method of Network class
+     * Mutator method of Network class
      *
-     * @return
      * @param connectStatus
+     * @return
      */
-    public void setClientConnectionStatus(String connectStatus)
-    {
+    public void setClientConnectionStatus(String connectStatus) {
         clientConnectionStatus = connectStatus;
     }
 
     /**
-     *  Accessor method of Network class
+     * Accessor method of Network class
      *
-     * @return serverConnectionStatus
      * @param
+     * @return serverConnectionStatus
      */
-    public String getServerConnectionStatus()
-    {
+    public String getServerConnectionStatus() {
         return serverConnectionStatus;
     }
 
     /**
-     *  Mutator method of Network class
+     * Mutator method of Network class
      *
-     * @return
      * @param connectStatus
+     * @return
      */
-    public void setServerConnectionStatus(String connectStatus)
-    {
+    public void setServerConnectionStatus(String connectStatus) {
         serverConnectionStatus = connectStatus;
     }
 
     /**
-     *  Accessor method of Network class
+     * Accessor method of Network class
      *
-     * @return portID
      * @param
+     * @return portID
      */
-    public int getPortID()
-    {
+    public int getPortID() {
         return portID;
     }
 
     /**
-     *  Mutator method of Network class
+     * Mutator method of Network class
      *
-     * @return
      * @param pid
+     * @return
      */
-    public void setPortID(int pid)
-    {
+    public void setPortID(int pid) {
         portID = pid;
     }
 
     /**
-     *  Accessor method of Netowrk class
+     * Accessor method of Netowrk class
      *
-     * @return inBufferStatus
      * @param
+     * @return inBufferStatus
      */
-    public String getInBufferStatus()
-    {
+    public String getInBufferStatus() {
         return inBufferStatus;
     }
 
     /**
-     *  Mutator method of Network class
+     * Mutator method of Network class
      *
-     * @return
      * @param inBufStatus
+     * @return
      */
-    public void setInBufferStatus(String inBufStatus)
-    {
+    public void setInBufferStatus(String inBufStatus) {
         inBufferStatus = inBufStatus;
     }
 
     /**
-     *  Accessor method of Netowrk class
+     * Accessor method of Netowrk class
      *
-     * @return outBufferStatus
      * @param
+     * @return outBufferStatus
      */
-    public String getOutBufferStatus()
-    {
+    public String getOutBufferStatus() {
         return outBufferStatus;
     }
 
     /**
-     *  Mutator method of Network class
+     * Mutator method of Network class
      *
-     * @return
      * @param outBufStatus
+     * @return
      */
-    public void setOutBufferStatus(String outBufStatus)
-    {
+    public void setOutBufferStatus(String outBufStatus) {
         outBufferStatus = outBufStatus;
     }
 
     /**
-     *  Accessor method of Netowrk class
+     * Accessor method of Netowrk class
      *
-     * @return networkStatus
      * @param
+     * @return networkStatus
      */
-    public String getNetworkStatus()
-    {
+    public String getNetworkStatus() {
         return networkStatus;
     }
 
     /**
-     *  Mutator method of Network class
+     * Mutator method of Network class
      *
-     * @return
      * @param netStatus
+     * @return
      */
-    public void setNetworkStatus(String netStatus)
-    {
+    public void setNetworkStatus(String netStatus) {
         networkStatus = netStatus;
     }
 
     /**
-     *  Accessor method of Netowrk class
+     * Accessor method of Netowrk class
      *
-     * @return inputIndexClient
      * @param
+     * @return inputIndexClient
      */
-    public int getinputIndexClient()
-    {
+    public int getinputIndexClient() {
         return inputIndexClient;
     }
 
     /**
-     *  Mutator method of Network class
+     * Mutator method of Network class
      *
-     * @return
      * @param i1
+     * @return
      */
-    public void setinputIndexClient(int i1)
-    {
+    public void setinputIndexClient(int i1) {
         inputIndexClient = i1;
     }
 
     /**
-     *  Accessor method of Netowrk class
+     * Accessor method of Netowrk class
      *
-     * @return inputIndexServer
      * @param
+     * @return inputIndexServer
      */
-    public int getinputIndexServer()
-    {
+    public int getinputIndexServer() {
         return inputIndexServer;
     }
 
     /**
-     *  Mutator method of Network class
+     * Mutator method of Network class
      *
-     * @return
      * @param i2
+     * @return
      */
-    public void setinputIndexServer(int i2)
-    {
+    public void setinputIndexServer(int i2) {
         inputIndexServer = i2;
     }
 
     /**
-     *  Accessor method of Netowrk class
+     * Accessor method of Netowrk class
      *
-     * @return outputIndexServer
      * @param
+     * @return outputIndexServer
      */
-    public int getoutputIndexServer()
-    {
+    public int getoutputIndexServer() {
         return outputIndexServer;
     }
 
     /**
-     *  Mutator method of Network class
+     * Mutator method of Network class
      *
-     * @return
      * @param o1
+     * @return
      */
-    public void setoutputIndexServer(int o1)
-    {
+    public void setoutputIndexServer(int o1) {
         outputIndexServer = o1;
     }
 
     /**
-     *  Accessor method of Netowrk class
+     * Accessor method of Netowrk class
      *
-     * @return outputIndexClient
      * @param
+     * @return outputIndexClient
      */
-    public int getoutputIndexClient()
-    {
+    public int getoutputIndexClient() {
         return outputIndexClient;
     }
 
     /**
-     *  Mutator method of Network class
+     * Mutator method of Network class
      *
-     * @return
      * @param o2
+     * @return
      */
-    public void setoutputIndexClient(int o2)
-    {
+    public void setoutputIndexClient(int o2) {
         outputIndexClient = o2;
     }
 
     /**
-     *  Accessor method of Netowrk class
+     * Accessor method of Netowrk class
      *
-     * @return maxNbPackets
      * @param
+     * @return maxNbPackets
      */
-    public int getMaxNbPackets()
-    {
+    public int getMaxNbPackets() {
         return maxNbPackets;
     }
 
     /**
-     *  Mutator method of Network class
+     * Mutator method of Network class
      *
-     * @return
      * @param maxPackets
+     * @return
      */
-    public void setMaxNbPackets(int maxPackets)
-    {
+    public void setMaxNbPackets(int maxPackets) {
         maxNbPackets = maxPackets;
     }
 
     /**
-     *  Transmitting the transactions from the client to the server through the network
+     * Transmitting the transactions from the client to the server through the network
      *
-     * @return
      * @param inPacket transaction transferred from the client
-     *
+     * @return
      */
-    public boolean send(Transactions inPacket)
-    {
+    public boolean send(Transactions inPacket) {
         inComingPacket[inputIndexClient].setAccountNumber(inPacket.getAccountNumber());
         inComingPacket[inputIndexClient].setOperationType(inPacket.getOperationType());
         inComingPacket[inputIndexClient].setTransactionAmount(inPacket.getTransactionAmount());
@@ -352,26 +321,24 @@ public class Network extends Thread{
         inComingPacket[inputIndexClient].setTransactionError(inPacket.getTransactionError());
         inComingPacket[inputIndexClient].setTransactionStatus("transferred");
 
-        setinputIndexClient(((getinputIndexClient( ) + 1) % getMaxNbPackets ()));	/* Increment the input buffer index  for the client */
+        setinputIndexClient(((getinputIndexClient() + 1) % getMaxNbPackets()));    /* Increment the input buffer index  for the client */
 
         /* Check if input buffer is full */
-        if (getinputIndexClient() == getoutputIndexServer())
-        {
+        if (getinputIndexClient() == getoutputIndexServer()) {
             setInBufferStatus("full");
-        }
-        else
+        } else
             setInBufferStatus("normal");
 
         return true;
     }
 
-    /** Transmitting the transactions from the server to the client through the network
-     * @return
-     * @param outPacket updated transaction received by the client
+    /**
+     * Transmitting the transactions from the server to the client through the network
      *
+     * @param outPacket updated transaction received by the client
+     * @return
      */
-    public boolean receive(Transactions outPacket)
-    {
+    public boolean receive(Transactions outPacket) {
         outPacket.setAccountNumber(outGoingPacket[outputIndexClient].getAccountNumber());
         outPacket.setOperationType(outGoingPacket[outputIndexClient].getOperationType());
         outPacket.setTransactionAmount(outGoingPacket[outputIndexClient].getTransactionAmount());
@@ -379,28 +346,24 @@ public class Network extends Thread{
         outPacket.setTransactionError(outGoingPacket[outputIndexClient].getTransactionError());
         outPacket.setTransactionStatus("done");
 
-        setoutputIndexClient(((getoutputIndexClient( ) + 1) % getMaxNbPackets( ))); /* Increment the output buffer index for the client */
+        setoutputIndexClient(((getoutputIndexClient() + 1) % getMaxNbPackets())); /* Increment the output buffer index for the client */
 
         /* Check if output buffer is empty */
-        if ( getoutputIndexClient( ) == getinputIndexServer( ))
-        {
+        if (getoutputIndexClient() == getinputIndexServer()) {
             setOutBufferStatus("empty");
-        }
-        else
+        } else
             setOutBufferStatus("normal");
 
         return true;
     }
 
     /**
-     *  Transferring the completed transactions from the server to the network buffer
+     * Transferring the completed transactions from the server to the network buffer
      *
-     * @return
      * @param outPacket updated transaction transferred by the server to the network output buffer
-     *
+     * @return
      */
-    public boolean transferOut(Transactions outPacket)
-    {
+    public boolean transferOut(Transactions outPacket) {
         outGoingPacket[inputIndexServer].setAccountNumber(outPacket.getAccountNumber());
         outGoingPacket[inputIndexServer].setOperationType(outPacket.getOperationType());
         outGoingPacket[inputIndexServer].setTransactionAmount(outPacket.getTransactionAmount());
@@ -410,24 +373,21 @@ public class Network extends Thread{
 
         setinputIndexServer(((getinputIndexServer() + 1) % getMaxNbPackets())); /* Increment the output buffer index for the server */
         /* Check if output buffer is full */
-        if ( getinputIndexServer( ) == getoutputIndexClient( ))
-        {
+        if (getinputIndexServer() == getoutputIndexClient()) {
             setOutBufferStatus("full");
-        }
-        else
+        } else
             setOutBufferStatus("normal");
 
         return true;
     }
 
     /**
-     *  Transferring the transactions from the network buffer to the server
-     * @return
-     * @param inPacket transaction transferred from the input buffer to the server
+     * Transferring the transactions from the network buffer to the server
      *
+     * @param inPacket transaction transferred from the input buffer to the server
+     * @return
      */
-    public boolean transferIn(Transactions inPacket)
-    {
+    public boolean transferIn(Transactions inPacket) {
         inPacket.setAccountNumber(inComingPacket[outputIndexServer].getAccountNumber());
         inPacket.setOperationType(inComingPacket[outputIndexServer].getOperationType());
         inPacket.setTransactionAmount(inComingPacket[outputIndexServer].getTransactionAmount());
@@ -435,94 +395,73 @@ public class Network extends Thread{
         inPacket.setTransactionError(inComingPacket[outputIndexServer].getTransactionError());
         inPacket.setTransactionStatus("received");
 
-        setoutputIndexServer(((getoutputIndexServer() + 1) % getMaxNbPackets()));	/* Increment the input buffer index for the server */
+        setoutputIndexServer(((getoutputIndexServer() + 1) % getMaxNbPackets()));    /* Increment the input buffer index for the server */
         /* Check if input buffer is empty */
-        if ( getoutputIndexServer( ) == getinputIndexClient( ))
-        {
+        if (getoutputIndexServer() == getinputIndexClient()) {
             setInBufferStatus("empty");
-        }
-        else
+        } else
             setInBufferStatus("normal");
 
         return true;
     }
 
     /**
-     *  Handling of connection requests through the network
+     * Handling of connection requests through the network
      *
-     * @return valid connection
      * @param IP
-     *
+     * @return valid connection
      */
-    public boolean connect(String IP)
-    {
-        if (getNetworkStatus().equals("active"))
-        {
-            if (getClientIP().equals(IP))
-            {
+    public boolean connect(String IP) {
+        if (getNetworkStatus().equals("active")) {
+            if (getClientIP().equals(IP)) {
                 setClientConnectionStatus("connected");
                 setPortID(0);
-            }
-            else
-            if (getServerIP().equals(IP))
-            {
+            } else if (getServerIP().equals(IP)) {
                 setServerConnectionStatus("connected");
             }
             return true;
-        }
-        else
+        } else
             return false;
     }
 
     /**
-     *  Handling of disconnection requests through the network
-     * @return valid disconnection
-     * @param IP
+     * Handling of disconnection requests through the network
      *
+     * @param IP
+     * @return valid disconnection
      */
-    public boolean disconnect(String IP)
-    {
-        if (getNetworkStatus( ).equals("active"))
-        {
-            if (getClientIP().equals(IP))
-            {
+    public boolean disconnect(String IP) {
+        if (getNetworkStatus().equals("active")) {
+            if (getClientIP().equals(IP)) {
                 setClientConnectionStatus("disconnected");
-            }
-            else
-            if (getServerIP().equals(IP))
-            {
+            } else if (getServerIP().equals(IP)) {
                 setServerConnectionStatus("disconnected");
             }
             return true;
-        }
-        else
+        } else
             return false;
     }
 
     /**
-     *  Create a String representation based on the Network Object
+     * Create a String representation based on the Network Object
      *
      * @return String representation
      */
-    public String toString()
-    {
+    public String toString() {
         return ("\n Network status " + getNetworkStatus() + "Input buffer " + getInBufferStatus() + "Output buffer " + getOutBufferStatus());
     }
 
     /**
-     *  Code for the run method
+     * Code for the run method
      *
-     * @return
      * @param
+     * @return
      */
-    public void run()
-    {
-        while (true)
-        {
+    public void run() {
+        while (true) {
             Thread.yield();
-            
-            if(getClientConnectionStatus().equals("disconnected") && getServerConnectionStatus().equals("disconnected"))
-            {
+
+            if (getClientConnectionStatus().equals("disconnected") && getServerConnectionStatus().equals("disconnected")) {
                 System.out.println("\n Terminating network thread - Client disconnected Server disconnected");
                 System.exit(0);
             }
